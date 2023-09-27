@@ -27,4 +27,4 @@ const isStrangeNumber = (randomNumber) => {
   }
 };
 
-isStrangeNumber(6); //true
+console.log(isStrangeNumber(6)); //true

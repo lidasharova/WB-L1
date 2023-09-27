@@ -27,7 +27,7 @@ const checkPalindrom = (randomString) => {
   }
 };
 
-// console.log(checkPalindrom('аргентина манит негр')); //строка "аргентина манит негра" - палиндром
+console.log(checkPalindrom('аргентина манит негра')); //строка "аргентина манит негра" - палиндром
 
 //  2 вариант
 
@@ -59,7 +59,7 @@ function isPalindrome(randomString) {
   }
 }
 
-isPalindrome('аргентина манит негра'); //true
+console.log(isPalindrome('abccba')); //true
 
 //3 вариант
 
@@ -103,4 +103,4 @@ function isPalindromeTwo(randomString) {
     return 'аргумент функции не является строкой или это пустая строка';
   }
 }
-isPalindromeTwo('шалаш');
+console.log(isPalindromeTwo('шалаш')); //true
