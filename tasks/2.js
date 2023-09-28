@@ -28,3 +28,4 @@ const isStrangeNumber = (randomNumber) => {
 };
 
 console.log(isStrangeNumber(6)); //true
+
