@@ -29,7 +29,7 @@ class ListNode {
 
 const myFunc = (jsonStr) => {
   try {
-    // Разбор JSON-строки в JavaScript-массив
+    // Разбор JSON-строки в JavaScript-объект
     const data = JSON.parse(jsonStr);
 
     // Создание фиктивной головы и указателя текущего узла
