@@ -27,11 +27,11 @@ document.querySelector('button').addEventListener('click', () => {
   //получим размер localStorage и выведем на страничку
   const maxLocalStorageSize = getSize();
   textInfo = `Размер вашего хранилища: ${maxLocalStorageSize} байт
-  или ${Math.floor(maxLocalStorageSize / 1024 / 1024)} Мб;
+  или около ${Math.floor(maxLocalStorageSize / 1024 / 1024)} Мб
   `;
   const text = document.createElement('p');
   text.textContent = textInfo;
-  document.querySelector('p')
-    ? null
-    : document.querySelector('div').append(text);
+  document.querySelector('p') ? null : document.body.append(text);
 });
+
+//Ответ: Размер хранилища LocalStorage моего браузера Google Chrome: 5260081 байт или около 5 Мб
