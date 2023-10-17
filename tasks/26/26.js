@@ -3,9 +3,8 @@
 для решения напишем рекурсивную функцию, которая будет вызывать саму себя для каждого следующего элемента.
 */
 
-
 //что бы обойти ВСЕ дерево DOM -  и дочерние и соседние элементы стартового элемента мы воспользуемся уникальной коллекцией Set, что бы не повторять элементы которые являются одновременно и дочерними и соседними.
-function recursiveDOM(element, visitedElements = new Set()) {
+const recursiveDOM = (element, visitedElements = new Set()) => {
   //создадим уник коллекцию элементов, которую будем передавать дальше
 
   // Проверяем элемент на наличие в коллекции
@@ -33,7 +32,7 @@ function recursiveDOM(element, visitedElements = new Set()) {
       nextSibling = nextSibling.nextSibling;
     }
   }
-}
+};
 
 //в ф-цию мы передадим элемент с которого хотим начать обход, найдем его в DOM по селектору
 const startElement = document.querySelector('.start');

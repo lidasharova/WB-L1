@@ -2,7 +2,7 @@
 Подсчитать максимальный объем данных, который можно записать в localStorage вашего браузера.
 */
 //создадим ф-цию в кот подсчитаем размер LocalStorage
-function getSize() {
+const getSize = () => {
   let key = '1';
   let value = 'value';
   localStorage.clear(); //очистим localStorage
@@ -21,7 +21,7 @@ function getSize() {
     //вернем длину строки
     return string.length;
   }
-}
+};
 
 document.querySelector('button').addEventListener('click', () => {
   //получим размер localStorage и выведем на страничку
