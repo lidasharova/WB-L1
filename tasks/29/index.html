@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>task 29</title>
+</head>
+
+<style>
+  .box-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #def6f7d5;
+    border: 2px solid rgba(14, 86, 150, 0.814);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    text-align: center;
+  }
+
+  form h2 {
+    font-size: 24px;
+    color: #333;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="submit"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  form input[type="submit"] {
+    background-color: #79ace2;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in;
+  }
+
+  form input[type="submit"]:hover {
+    background-color: #2667ae;
+  }
+</style>
+
+<body>
+  <main>
+    <section class="container">
+      <form class="myForm">
+        <h2>Заполните форму</h2>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <input type="submit" value="Отправить">
+      </form>
+    </section>
+  </main>
+  <script src="index.js"></script>
+</body>
+
+</html>
