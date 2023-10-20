@@ -46,7 +46,7 @@ function showDate(formData) {
 }
 
 // ф-ция для отправки данных из формы на сервер
-/* function sendDate(formData) {
+/* const sendDate = (formData) => {
   try {
     fetch('https://example.com/api/submit', {
       method: 'POST',
@@ -54,7 +54,7 @@ function showDate(formData) {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Ошибка сети или сервера');
+          console.error('Ошибка сети или сервера');
         }
         return response.json();
       })
