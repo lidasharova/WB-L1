@@ -18,45 +18,61 @@ addressInput.addEventListener('input', async () => {
   addressList.innerHTML = '';
   //если пользователь ввел что-то в инпут, запустим отрисовку подсказок
   if (queryText) {
-    await renderResultsDebounced(queryText);
+    await debouncedAndThrottledRender(queryText);
   }
 });
 
-//тк я столкнулась с проблемой слишком частых запросов, а значит и дублированием ответов, то решила применить "Дебаунсинг" - он позволяет управлять частотой выполнения функции. Он создает задержку перед выполнением определенной функции после возникновения события. Если событие происходит многократно или с высокой частотой, дебаунсинг позволяет игнорировать все повторные срабатывания функции в течение заданного интервала времени.(https://www.paulsblog.dev/advanced-javascript-functions-to-improve-code-quality/)
+//тк я столкнулась с проблемой слишком частых запросов, а значит и дублированием ответов, то решением этой проблемы было применить "Дебаунсинг" - он позволяет управлять частотой выполнения функции. Он создает задержку перед выполнением определенной функции после возникновения события. Если событие происходит многократно или с высокой частотой, дебаунсинг позволяет игнорировать все повторные срабатывания функции в течение заданного интервала времени.(https://www.paulsblog.dev/advanced-javascript-functions-to-improve-code-quality/)
 
-//ф-ция  Дебаунсинга по ограничению запросов в определенный промежуток времени
-const setTimeLimit = (myFunc, time) => {
-  let timeout; // переменная timeout для хранения идентификатора таймера
+//ф-ция Дебаунсинга по ограничению кол-ва запросов в определенный промежуток времени (как обертка для моей ф-ции)
+const debounce = (myFunc, time) => {
+  let timeoutId; // переменная timeout для хранения идентификатора таймера
   return function () {
     const context = this; // сохраним контекст вызова функции (this)
     const args = arguments; // сохраним аргументы функции
-    clearTimeout(timeout); // очистим предыдущий запущенный таймаут (если есть)
+    clearTimeout(timeoutId); // очистим предыдущий запущенный таймаут (если есть)
     // установим новый таймаут
-    timeout = setTimeout(() => {
+    timeoutId = setTimeout(() => {
       myFunc.apply(context, args); // когда время ожидания завершиться, выполнится переданная функция myFunc с сохраненным контекстом и аргументами
     }, time); // установится задержка (время ожидания) перед выполнением функции
   };
 };
 
-// ф-ция с ограничением частоты вызова в 1 секунду для отрисовки подсказок
-const renderResultsDebounced = setTimeLimit(async (queryText) => {
-  addressList.innerHTML = ''; // удалим старые подсказки
-  const result = await geocodingResults(queryText); //отправим запрос
+//ф-ция защиты от троттлинга - она будет ограничивать вызов ф-ции, чтобы он происходил не чаще, чем раз в заданное нами время.
+const throttle = (func, delay) => {
+  let wait = false;
+  return (...args) => {
+    if (wait) {
+      return;
+    }
+    func(...args);
+    wait = true;
+    setTimeout(() => {
+      wait = false;
+    }, delay);
+  };
+};
 
-  //пройдемся по массиву и у каждого элемента вытащим адрес подсказки
-  result.forEach((address) => {
-    const listItem = document.createElement('li'); //осздадим новый элемент для подсказок
-    const mainAddress = address.address.formatted_address; //достанем адрес подсказки из обьекта
-    listItem.textContent = mainAddress; //запишем адрес в элемент
-
-    //установим прослушку, при клике на подсказку
-    listItem.addEventListener('click', function () {
-      addressInput.value = mainAddress; //установим подсказку в инпут
-      addressList.innerHTML = ''; //удалим старые подсказки
+//обернем нашу ф-цию по отрисовке подсказок сразу в обе обертки.(исходя из условия задачи)Сначала применится троттлинг с задержкой в 500 миллисекунд, а затем дебаунсинг с задержкой в 500 миллисекунд.
+const debouncedAndThrottledRender = debounce(
+  throttle(async (queryText) => {
+    addressList.innerHTML = ''; // удалим старые подсказки
+    const result = await geocodingResults(queryText); //отправим запрос
+    //пройдемся по массиву и у каждого элемента вытащим адрес подсказки
+    result.forEach((address) => {
+      const listItem = document.createElement('li'); //осздадим новый элемент для подсказок
+      const mainAddress = address.address.formatted_address; //достанем адрес подсказки из обьекта
+      listItem.textContent = mainAddress; //запишем адрес в элемент
+      //установим прослушку, при клике на подсказку
+      listItem.addEventListener('click', function () {
+        addressInput.value = mainAddress; //установим подсказку в инпут
+        addressList.innerHTML = ''; //удалим старые подсказки
+      });
+      addressList.append(listItem);
     });
-    addressList.append(listItem);
-  });
-}, 1000); // интервал задержки 1 секунда
+  }, 500),
+  500
+);
 
 //ф-ция для получения данных с сервера
 const geocodingResults = async (queryText) => {
