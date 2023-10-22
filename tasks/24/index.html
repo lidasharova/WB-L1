@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>task 24</title>
+</head>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  th,
+  td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .page-btn {
+    cursor: pointer;
+    border: 1px solid rgb(68, 138, 68);
+    background-color: rgb(135, 217, 190);
+    transition: all 0.3s ease-in;
+    margin: 5px;
+    border-radius: 3px;
+  }
+
+  .page-btn.active {
+    background-color: rgb(211, 242, 33);
+  }
+
+  .page-btn:hover {
+    background-color: rgb(83, 163, 136);
+  }
+
+  .reset-sorting {
+    margin-bottom: 20px;
+    background-color: antiquewhite;
+    border: 1px solid rgb(135, 123, 66);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+  }
+
+  th {
+    transition: all 0.2s ease-in;
+  }
+
+  th.highlighted {
+    background-color: rgb(83, 163, 136);
+  }
+
+  .reset-sorting:hover {
+    background-color: rgb(242, 186, 33);
+  }
+</style>
+
+<body>
+  <header>
+    <h1>Таблица данных</h1>
+    <button class="reset-sorting">сброс сортировки</button>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr class="table-head">
+        </tr>
+      </thead>
+      <tbody class="table-body">
+      </tbody>
+    </table>
+    <div class="pagination"></div>
+  </main>
+  <script src="index.js"></script>
+</body>
+
+</html>
