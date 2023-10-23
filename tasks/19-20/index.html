@@ -45,8 +45,8 @@
 
   .post-list li {
     border: 1px solid #ddd;
-    background-color: #fff;
-    margin-bottom: 10px;
+    background-color: hsl(260deg 17.62% 87.8%);
+    margin: 20px;
     border-radius: 5px;
     padding: 10px;
   }
@@ -54,19 +54,83 @@
   .post-list li:last-child {
     margin-bottom: 0;
   }
+
+
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #0a2194;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .post-list {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .post-content {
+    color: rgba(3, 3, 9, 0.753);
+    font-size: 17px;
+    margin: 20px;
+  }
+
+  .post-img {
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .post-img {
+      max-width: 450px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .post-img {
+      max-width: 290px;
+    }
+  }
 </style>
 
 
 <body>
   <main class="container">
     <header class="header">
-      <h1>VK Posts Nature</h1>
+      <h1>VK Posts Hystory of Fashion</h1>
     </header>
     <section class="widget-content">
+
       <ul class="post-list">
 
       </ul>
+
+      <div class="loader-container">
+        <div class="loader"></div>
+      </div>
     </section>
+    <div class="response-error"></div>
   </main>
 
   <script src="index.js"> </script>
